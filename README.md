@@ -142,7 +142,36 @@ python -m cad_release_monitor.format_cli --format "ACIS SAT"
 	- `backoff_factor`: retry wait multiplier (default: 0.8).
 	- `timeout`: HTTP timeout in seconds for this source (default: from `--timeout` flag).
 	- `verify_ssl`: set to `false` only when a source has certificate issues.
+	- `discovery_urls`: stable index/tag pages to crawl for fresh article links.
+	- `discovery_link_patterns`: regex filters applied to discovered links and anchor text.
+	- `discovery_allowed_domains`: optional domain allowlist for discovered links.
+	- `max_discovered_urls`: cap discovered links per run (default: 8).
+	- `use_generic_fallback`: set `false` when generic extraction is too noisy for a source.
 - Update `data/current_versions.json` with your current in-use versions.
+
+Example dynamic discovery source config:
+
+```json
+{
+	"name": "JT",
+	"url": "https://www.digitalengineering247.com/topic/tag/3D-Interoperability",
+	"discovery_urls": [
+		"https://www.digitalengineering247.com/topic/tag/3D-Interoperability"
+	],
+	"discovery_link_patterns": [
+		"spatial-releases-\\d{4}",
+		"Spatial\\s+Releases\\s+\\d{4}"
+	],
+	"discovery_allowed_domains": [
+		"digitalengineering247.com"
+	],
+	"max_discovered_urls": 8,
+	"use_generic_fallback": false,
+	"patterns": [
+		"\\bJT\\s*(?:v(?:ersion)?\\s*)?(\\d+(?:\\.\\d+){1,3})\\b"
+	]
+}
+```
 
 ### Format Support Gap Analysis
 

@@ -28,13 +28,23 @@
   },
   {
     "name": "JT",
-    "url": "https://www.digitalengineering247.com/article/spatial-releases-2026-1.0.1",
+    "url": "https://www.digitalengineering247.com/topic/tag/3D-Interoperability",
     "fallback_urls": [
-      "https://www.businesswire.com/news/home/20260424111656/en/Spatial-Announces-the-Release-2026-1.0.1-New-Enhancements-Across-3D-InterOp-Data-Prep-Meshing-and-3D-Modeling-SDKs",
       "https://www.plm.automation.siemens.com/global/en/products/open/jt-open/",
       "https://plm.sw.siemens.com/en-US/jt-open/",
       "https://plm.sw.siemens.com/en-US/"
     ],
+    "discovery_urls": [
+      "https://www.digitalengineering247.com/topic/tag/3D-Interoperability"
+    ],
+    "discovery_link_patterns": [
+      "spatial-releases-\\d{4}",
+      "Spatial\\s+Releases\\s+\\d{4}"
+    ],
+    "discovery_allowed_domains": [
+      "digitalengineering247.com"
+    ],
+    "max_discovered_urls": 8,
     "use_generic_fallback": false,
     "patterns": [
       "\\bJT\\s*(?:v(?:ersion)?\\s*)?(\\d+(?:\\.\\d+){1,3})\\b"

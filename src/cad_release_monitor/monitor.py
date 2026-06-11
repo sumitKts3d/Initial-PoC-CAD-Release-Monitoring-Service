@@ -5,6 +5,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -72,6 +73,22 @@ def fetch_page_text(
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
     return soup.get_text(" ", strip=True)
+
+
+def fetch_page_html(
+    url: str,
+    timeout: float = 20.0,
+    verify_ssl: bool = True,
+    retries: int = 2,
+    backoff_factor: float = 0.8,
+) -> str:
+    if not verify_ssl:
+        requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+
+    session = build_session(retries=retries, backoff_factor=backoff_factor)
+    response = session.get(url, headers=DEFAULT_HEADERS, timeout=timeout, verify=verify_ssl)
+    response.raise_for_status()
+    return response.text
 
 
 def version_key(version: str) -> tuple[int, ...]:
@@ -193,6 +210,73 @@ def filter_newer_versions(current_version: str, detected_versions: list[str]) ->
     return dedupe_and_sort_versions(set(newer))
 
 
+def _url_matches_domain(url: str, domains: list[str]) -> bool:
+    netloc = urlparse(url).netloc.lower()
+    return any(netloc == d.lower() or netloc.endswith(f".{d.lower()}") for d in domains)
+
+
+def discover_candidate_urls(
+    source: dict[str, Any],
+    timeout: float,
+    verify_ssl: bool,
+    retries: int,
+    backoff_factor: float,
+) -> list[str]:
+    discovery_urls_raw = source.get("discovery_urls", [])
+    if not isinstance(discovery_urls_raw, list):
+        return []
+
+    discovery_urls = dedupe_urls([u for u in discovery_urls_raw if isinstance(u, str)])
+    if not discovery_urls:
+        return []
+
+    pattern_raw = source.get("discovery_link_patterns", [])
+    pattern_list = [p for p in pattern_raw if isinstance(p, str)] if isinstance(pattern_raw, list) else []
+    link_regexes = [re.compile(p, flags=re.IGNORECASE) for p in pattern_list]
+
+    domain_raw = source.get("discovery_allowed_domains", [])
+    allowed_domains = [d.strip() for d in domain_raw if isinstance(d, str) and d.strip()] if isinstance(domain_raw, list) else []
+
+    max_discovered_urls = int(source.get("max_discovered_urls", 8))
+    discovered: list[str] = []
+
+    for discovery_url in discovery_urls:
+        try:
+            html = fetch_page_html(
+                url=discovery_url,
+                timeout=timeout,
+                verify_ssl=verify_ssl,
+                retries=retries,
+                backoff_factor=backoff_factor,
+            )
+        except Exception:  # noqa: BLE001
+            continue
+
+        soup = BeautifulSoup(html, "html.parser")
+        for anchor in soup.select("a[href]"):
+            href = anchor.get("href", "").strip()
+            if not href or href.startswith("#") or href.startswith("mailto:"):
+                continue
+
+            candidate_url = urljoin(discovery_url, href)
+            if not candidate_url.startswith("http"):
+                continue
+
+            if allowed_domains and not _url_matches_domain(candidate_url, allowed_domains):
+                continue
+
+            anchor_text = anchor.get_text(" ", strip=True)
+            match_target = f"{candidate_url} {anchor_text}"
+            if link_regexes and not any(regex.search(match_target) for regex in link_regexes):
+                continue
+
+            discovered.append(candidate_url)
+            if len(dedupe_urls(discovered)) >= max_discovered_urls:
+                return dedupe_urls(discovered)
+
+    return dedupe_urls(discovered)
+
+
 def check_source(
     source: dict[str, Any],
     current_versions: dict[str, Any],
@@ -222,7 +306,14 @@ def check_source(
         )
 
     configured_urls = [url] + [u for u in fallback_urls if isinstance(u, str) and u]
-    candidate_urls = dedupe_urls(custom_urls + configured_urls)
+    discovered_urls = discover_candidate_urls(
+        source=source,
+        timeout=source_timeout,
+        verify_ssl=verify_ssl,
+        retries=retries,
+        backoff_factor=backoff_factor,
+    )
+    candidate_urls = dedupe_urls(custom_urls + discovered_urls + configured_urls)
     text: str | None = None
     used_url = url
     last_error: str | None = None
