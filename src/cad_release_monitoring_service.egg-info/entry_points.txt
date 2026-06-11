@@ -1,2 +1,3 @@
 [console_scripts]
+cad-format-gaps = cad_release_monitor.format_cli:main
 cad-monitor = cad_release_monitor.cli:main

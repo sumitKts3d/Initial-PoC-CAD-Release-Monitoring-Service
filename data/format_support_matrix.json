@@ -1,0 +1,51 @@
+{
+  "JT": {
+    "HOOPS Exchange": "10.10",
+    "Spatial": "11.0",
+    "Datakit": "10.9",
+    "CAdExchanger": "10.10",
+    "3D InterOp": "11.0"
+  },
+  "STEP AP 242": {
+    "HOOPS Exchange": "Edition 3",
+    "Spatial": "Edition 3",
+    "Datakit": "Edition 3",
+    "CAdExchanger": "Edition 2",
+    "3D InterOp": "Edition 3"
+  },
+  "IGES": {
+    "HOOPS Exchange": "5.3",
+    "Spatial": "5.3",
+    "Datakit": "5.3",
+    "CAdExchanger": "5.3",
+    "3D InterOp": "5.3"
+  },
+  "ACIS SAT": {
+    "HOOPS Exchange": "35.0",
+    "Spatial": "36.0",
+    "Datakit": "35.0",
+    "CAdExchanger": "35.0",
+    "3D InterOp": "36.0"
+  },
+  "Parasolid": {
+    "HOOPS Exchange": "38.1",
+    "Spatial": "38.1",
+    "Datakit": "38.0",
+    "CAdExchanger": "38.1",
+    "3D InterOp": "38.1"
+  },
+  "DWG/DXF": {
+    "HOOPS Exchange": "2026",
+    "Spatial": "2026",
+    "Datakit": "2025",
+    "CAdExchanger": "2026",
+    "3D InterOp": "2026"
+  },
+  "IFC": {
+    "HOOPS Exchange": "4.3",
+    "Spatial": "4.3",
+    "Datakit": "4.2",
+    "CAdExchanger": "4.3",
+    "3D InterOp": "4.3"
+  }
+}

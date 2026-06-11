@@ -11,6 +11,7 @@ dependencies = [
 
 [project.scripts]
 cad-monitor = "cad_release_monitor.cli:main"
+cad-format-gaps = "cad_release_monitor.format_cli:main"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]

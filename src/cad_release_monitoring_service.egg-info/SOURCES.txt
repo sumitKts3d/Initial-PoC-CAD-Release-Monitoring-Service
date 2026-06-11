@@ -3,6 +3,8 @@ pyproject.toml
 src/cad_release_monitor/__init__.py
 src/cad_release_monitor/__main__.py
 src/cad_release_monitor/cli.py
+src/cad_release_monitor/format_analyzer.py
+src/cad_release_monitor/format_cli.py
 src/cad_release_monitor/monitor.py
 src/cad_release_monitoring_service.egg-info/PKG-INFO
 src/cad_release_monitoring_service.egg-info/SOURCES.txt
