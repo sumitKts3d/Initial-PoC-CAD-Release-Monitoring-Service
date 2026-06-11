@@ -146,6 +146,26 @@ def extract_versions_generic(text: str, name: str) -> list[str]:
     return dedupe_and_sort_versions(matches)
 
 
+def extract_version_dates(text: str) -> dict[str, str]:
+    """
+    Extract version+date pairs from structured release notes.
+    Useful for sources like PDFL with format: v18.0.5PlusP2c (April 17, 2026)
+    Returns: {"version": "date_string"}
+    """
+    pairs: dict[str, str] = {}
+    
+    # Pattern for: (Version) (Date) or v(Version) (Date)
+    pattern = r"v?([0-9]+\.[0-9]+(?:\.[0-9]+)*\w*)\s*\(([^)]+(?:202[0-9]|202[1-9][0-9])[^)]*)\)"
+    
+    for match in re.finditer(pattern, text):
+        version = match.group(1).strip()
+        date = match.group(2).strip()
+        if version and date:
+            pairs[version] = date
+    
+    return pairs
+
+
 def parse_current_entry(entry: Any) -> tuple[str | None, list[str]]:
     if isinstance(entry, str):
         value = entry.strip()
