@@ -100,5 +100,94 @@
       "PDFL\\s*(\\d+(?:\\.\\d+)*)",
       "version\\s*(\\d+(?:\\.\\d+)*)"
     ]
+  },
+  {
+    "name": "HOOPS Exchange",
+    "url": "https://www.techsoft3d.com/products/hoops/exchange",
+    "fallback_urls": [
+      "https://www.techsoft3d.com/products/hoops",
+      "https://www.techsoft3d.com/downloads"
+    ],
+    "retries": 2,
+    "backoff_factor": 0.8,
+    "patterns": [
+      "Exchange\\s+(\\d+(?:\\.\\d+)*)",
+      "version\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){2,3})"
+    ]
+  },
+  {
+    "name": "Spatial",
+    "url": "https://www.digitalengineering247.com/article/spatial-releases-2026-1.0.1",
+    "fallback_urls": [
+      "https://www.digitalengineering247.com/",
+      "https://www.spatial.com/"
+    ],
+    "retries": 2,
+    "backoff_factor": 0.8,
+    "patterns": [
+      "Spatial\\s+(?:releases?)?\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){2,3})"
+    ]
+  },
+  {
+    "name": "Datakit",
+    "url": "https://www.datakit.com/en/products/",
+    "fallback_urls": [
+      "https://www.datakit.com/",
+      "https://www.datakit.com/en/"
+    ],
+    "retries": 2,
+    "backoff_factor": 0.8,
+    "patterns": [
+      "Datakit\\s+(\\d+(?:\\.\\d+)*)",
+      "version\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "CAdExchanger",
+    "url": "https://cadexchanger.com/",
+    "fallback_urls": [
+      "https://cadexchanger.com/docs",
+      "https://cadexchanger.com/download"
+    ],
+    "retries": 2,
+    "backoff_factor": 0.8,
+    "patterns": [
+      "CAdExchanger\\s+(\\d+(?:\\.\\d+)*)",
+      "version\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "3D InterOp",
+    "url": "https://www.spatial.com/products/3d-interop",
+    "fallback_urls": [
+      "https://www.spatial.com/",
+      "https://www.spatial.com/news"
+    ],
+    "retries": 2,
+    "backoff_factor": 0.8,
+    "patterns": [
+      "InterOp\\s+(\\d+(?:\\.\\d+)*)",
+      "version\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){2,3})"
+    ]
+  },
+  {
+    "name": "LibreCAD",
+    "url": "https://librecad.org/",
+    "fallback_urls": [
+      "https://librecad.org/cms/home.html",
+      "https://github.com/LibreCAD/LibreCAD"
+    ],
+    "retries": 2,
+    "backoff_factor": 0.8,
+    "patterns": [
+      "LibreCAD\\s+(\\d+(?:\\.\\d+)*)",
+      "version\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
   }
 ]

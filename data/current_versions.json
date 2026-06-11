@@ -214,5 +214,41 @@
     "source_urls": [
       "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
     ]
+  },
+  "HOOPS Exchange": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.techsoft3d.com/products/hoops/exchange"
+    ]
+  },
+  "Spatial": {
+    "current_version": "2026.1",
+    "source_urls": [
+      "https://www.digitalengineering247.com/article/spatial-releases-2026-1.0.1"
+    ]
+  },
+  "Datakit": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.datakit.com/en/products/"
+    ]
+  },
+  "CAdExchanger": {
+    "current_version": "3.26",
+    "source_urls": [
+      "https://cadexchanger.com/"
+    ]
+  },
+  "3D InterOp": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.spatial.com/products/3d-interop"
+    ]
+  },
+  "LibreCAD": {
+    "current_version": "2.3",
+    "source_urls": [
+      "https://librecad.org/"
+    ]
   }
 }
