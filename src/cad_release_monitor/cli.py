@@ -57,6 +57,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="",
         help="Optional file path to save machine-readable results",
     )
+    parser.add_argument(
+        "--format",
+        default="",
+        help="Optional: monitor only a specific format/source (e.g., JT, Creo, PDFL). If omitted, monitors all sources.",
+    )
     return parser
 
 
@@ -67,6 +72,17 @@ def main() -> None:
     sources = load_json(args.sources)
     current_versions = load_json(args.current)
     logger = logging.getLogger(__name__)
+
+    # Filter sources by format if specified
+    if args.format:
+        format_name = args.format.strip()
+        filtered = [s for s in sources if s.get("name", "").lower() == format_name.lower()]
+        if not filtered:
+            logger.error(f"Format '{format_name}' not found in sources. Available formats: {', '.join(s.get('name', 'Unknown') for s in sources)}")
+            print(f"ERROR: Format '{format_name}' not found in sources.")
+            print(f"Available formats: {', '.join(s.get('name', 'Unknown') for s in sources)}")
+            return
+        sources = filtered
 
     logger.info(f"Starting monitoring of {len(sources)} source(s)...")
     print("\nCAD Release Monitor - Report")

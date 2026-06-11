@@ -29,6 +29,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="data/format_support_matrix.json",
         help="Path to format support matrix JSON file",
     )
+    parser.add_argument(
+        "--format",
+        default="",
+        help="Optional: analyze only a specific format (e.g., JT, STEP AP 242, ACIS SAT). If omitted, analyzes all formats.",
+    )
     return parser
 
 
@@ -40,6 +45,16 @@ def main() -> None:
     logger.info("Loading format support matrix...")
     matrix = load_matrix(args.matrix)
     logger.info(f"Loaded {len(matrix)} formats")
+
+    # Filter matrix by format if specified
+    if args.format:
+        format_name = args.format.strip()
+        if format_name not in matrix:
+            logger.error(f"Format '{format_name}' not found in matrix. Available formats: {', '.join(matrix.keys())}")
+            print(f"ERROR: Format '{format_name}' not found in matrix.")
+            print(f"Available formats: {', '.join(matrix.keys())}")
+            return
+        matrix = {format_name: matrix[format_name]}
 
     logger.info("Analyzing format support gaps...")
     gaps = analyze_format_gaps(matrix)
