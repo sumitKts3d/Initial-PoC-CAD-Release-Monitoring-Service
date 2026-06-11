@@ -1,21 +1,34 @@
 # CAD Release Monitoring Service (PoC)
 
-This is a small proof of concept that scrapes official product/standard pages, extracts version candidates using regex rules, and compares them with your currently used versions.
+This is a small proof of concept that monitors CAD software releases and file format support across competing exchange tools. It has two main functions:
+
+1. **Release Monitoring**: Scrapes official product pages for version updates
+2. **Format Support Gap Analysis**: Identifies when competitors support newer file format versions than HOOPS Exchange
 
 ## What It Does
 
+### Release Monitoring
 - Loads monitored sources from `config/sources.json`.
 - Loads your currently used versions from `data/current_versions.json`.
 - Fetches each page and extracts version strings using source-specific patterns.
 - Alerts when a detected version is newer than your current version.
 - Optionally saves results as JSON for downstream automation.
 
+### Format Support Gap Analysis
+- Loads format support matrix from `data/format_support_matrix.json`.
+- Compares HOOPS Exchange format support against competitors (Spatial, Datakit, CAdExchanger, 3D InterOp).
+- Identifies formats where competitors support **newer versions** than HOOPS Exchange.
+- Helps prioritize format support implementation roadmap.
+
 ## Project Structure
 
 - `src/cad_release_monitor/monitor.py`: scraping and version-comparison logic.
-- `src/cad_release_monitor/cli.py`: command-line interface.
+- `src/cad_release_monitor/cli.py`: command-line interface for release monitoring.
+- `src/cad_release_monitor/format_analyzer.py`: format support gap analysis logic.
+- `src/cad_release_monitor/format_cli.py`: command-line interface for format gap analysis.
 - `config/sources.json`: monitored software/file-format sources and regex patterns.
-- `data/current_versions.json`: your baseline versions.
+- `data/current_versions.json`: your baseline product versions.
+- `data/format_support_matrix.json`: file format support matrix by tool.
 
 ## Quick Start
 
@@ -27,19 +40,25 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-3. Run the monitor:
+3. Run release monitoring:
 
 ```bash
 python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json
 ```
 
-4. Save JSON output (optional):
+4. Run format support gap analysis:
+
+```bash
+python -m cad_release_monitor.format_cli --matrix data/format_support_matrix.json
+```
+
+5. Save monitoring results as JSON (optional):
 
 ```bash
 python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json --output-json out/report.json
 ```
 
-## How To Customize
+### Release Monitoring
 
 - Add/remove monitored items in `config/sources.json`.
 - Tune each source's `patterns` to reduce false positives.
@@ -75,6 +94,18 @@ python -m cad_release_monitor --sources config/sources.json --current data/curre
 	- `verify_ssl`: set to `false` only when a source has certificate issues.
 - Update `data/current_versions.json` with your current in-use versions.
 
+### Format Support Gap Analysis
+
+- Edit `data/format_support_matrix.json` to track format versions supported by each tool.
+- Structure: `{"FormatName": {"ToolName": "SupportedVersion"}}`
+- Add/remove formats and tools as needed.
+- Format support matrix can be manually maintained or populated from source monitoring results.
+- For production reliability, consider:
+  - Source-specific parsers for higher precision
+  - Automated format version extraction from documentation
+  - Scheduling via Windows Task Scheduler or cron
+  - Notification integrations (email, Teams, Slack)
+  - Database storage for historical trends
 ## Notes and Limitations
 
 - Some official sites are highly dynamic or protected by anti-bot measures.
