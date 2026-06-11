@@ -202,6 +202,7 @@ def check_source(
     url = source["url"]
     fallback_urls = source.get("fallback_urls", [])
     patterns = source.get("patterns", [])
+    use_generic_fallback = bool(source.get("use_generic_fallback", True))
     verify_ssl = source.get("verify_ssl", True)
     retries = int(source.get("retries", 2))
     backoff_factor = float(source.get("backoff_factor", 0.8))
@@ -225,7 +226,7 @@ def check_source(
     text: str | None = None
     used_url = url
     last_error: str | None = None
-    detected_versions: list[str] = []
+    detected_pool: set[str] = set()
 
     for candidate_url in candidate_urls:
         try:
@@ -238,12 +239,14 @@ def check_source(
             )
             used_url = candidate_url
             detected_versions = extract_versions(text=text, patterns=patterns)
-            if not detected_versions:
+            if not detected_versions and use_generic_fallback:
                 detected_versions = extract_versions_generic(text=text, name=name)
             if detected_versions:
-                break
+                detected_pool.update(detected_versions)
         except Exception as exc:  # noqa: BLE001
             last_error = str(exc)
+
+    detected_versions = dedupe_and_sort_versions(detected_pool)
 
     if text is None and not detected_versions:
         return SourceCheckResult(
