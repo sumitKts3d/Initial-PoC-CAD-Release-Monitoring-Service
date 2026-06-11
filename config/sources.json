@@ -87,11 +87,23 @@
     "name": "Inventor",
     "url": "https://www.autodesk.com/products/inventor/overview",
     "fallback_urls": [
-      "https://www.autodesk.com/products/inventor"
+      "https://www.autodesk.com/products/inventor",
+      "https://www.autodesk.com/products"
     ],
-    "retries": 3,
-    "backoff_factor": 1.0,
-    "timeout": 40.0,
+    "discovery_urls": [
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_link_patterns": [
+      "inventor",
+      "autodesk\\s+inventor"
+    ],
+    "discovery_allowed_domains": [
+      "autodesk.com"
+    ],
+    "max_discovered_urls": 6,
+    "retries": 2,
+    "backoff_factor": 0.5,
+    "timeout": 45.0,
     "patterns": [
       "Inventor\\s*(\\d+(?:\\.\\d+)*)",
       "(20\\d{2})"
@@ -208,6 +220,277 @@
       "LibreCAD\\s+(\\d+(?:\\.\\d+)*)",
       "version\\s+(\\d+(?:\\.\\d+)*)",
       "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "3MF",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "3MF\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "ACIS",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "ACIS\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "AutoCAD - 2D",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "AutoCAD\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "AutoCAD - 3D",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "AutoCAD\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "Autodesk Inventor",
+    "url": "https://www.autodesk.com/products/inventor/overview",
+    "fallback_urls": [
+      "https://www.autodesk.com/products/inventor",
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_urls": [
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_link_patterns": [
+      "inventor",
+      "autodesk\\s+inventor"
+    ],
+    "discovery_allowed_domains": [
+      "autodesk.com"
+    ],
+    "max_discovered_urls": 6,
+    "retries": 2,
+    "backoff_factor": 0.5,
+    "timeout": 45.0,
+    "patterns": [
+      "Inventor\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "Autodesk Navisworks",
+    "url": "https://www.autodesk.com/products/navisworks/overview",
+    "fallback_urls": [
+      "https://www.autodesk.com/products/navisworks",
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_urls": [
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_link_patterns": [
+      "navisworks",
+      "autodesk\\s+navisworks"
+    ],
+    "discovery_allowed_domains": [
+      "autodesk.com"
+    ],
+    "max_discovered_urls": 6,
+    "retries": 2,
+    "backoff_factor": 0.5,
+    "timeout": 45.0,
+    "patterns": [
+      "Navisworks\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "CATIA V4",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "CATIA\\s*V4\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "CATIA V5",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "CATIA\\s*V5(?:[-\\s]*6R)?\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "CATIA V6 / 3DExperience",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "3DXML\\s*(\\d+(?:\\.\\d+)*)",
+      "CATIA\\s*V6\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "DGN",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "DGN\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "GL Transmission Format",
+    "url": "https://www.khronos.org/gltf/",
+    "patterns": [
+      "glTF\\s*(\\d+(?:\\.\\d+)*)",
+      "Version\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "I-deas",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "I-?deas\\s*(\\d+(?:\\.\\d+)*)",
+      "NX\\s*I-?deas\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "IGES",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "IGES\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "NX - Unigraphics",
+    "url": "https://plm.sw.siemens.com/en-US/nx/",
+    "patterns": [
+      "NX\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2}|25\\d{2})"
+    ]
+  },
+  {
+    "name": "Parasolid",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "Parasolid\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "PDF",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "PDF\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "PRC",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "PRC\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "Revit",
+    "url": "https://www.autodesk.com/products/revit/overview",
+    "fallback_urls": [
+      "https://www.autodesk.com/products/revit",
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_urls": [
+      "https://www.autodesk.com/products"
+    ],
+    "discovery_link_patterns": [
+      "revit",
+      "autodesk\\s+revit"
+    ],
+    "discovery_allowed_domains": [
+      "autodesk.com"
+    ],
+    "max_discovered_urls": 6,
+    "retries": 2,
+    "backoff_factor": 0.5,
+    "timeout": 45.0,
+    "patterns": [
+      "Revit\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "Rhino3D",
+    "url": "https://www.rhino3d.com/",
+    "patterns": [
+      "Rhino\\s*(\\d+(?:\\.\\d+)*)",
+      "Rhino3D\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "Solid Edge",
+    "url": "https://solidedge.siemens.com/",
+    "patterns": [
+      "Solid\\s*Edge\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "SolidWorks",
+    "url": "https://www.solidworks.com/product/solidworks-3d-cad",
+    "fallback_urls": [
+      "https://www.solidworks.com/"
+    ],
+    "retries": 3,
+    "backoff_factor": 1.0,
+    "patterns": [
+      "Solidworks\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "STEP",
+    "url": "https://www.ap242.org/",
+    "verify_ssl": false,
+    "fallback_urls": [
+      "https://www.prostep.org/en/medialibrary/downloads/step-ap242"
+    ],
+    "patterns": [
+      "STEP\\s*AP\\s*(\\d+(?:\\.\\d+)*)",
+      "AP\\s*242(?:\\s*Edition\\s*)?(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "U3D",
+    "url": "https://ecma-international.org/publications-and-standards/standards/ecma-363/",
+    "patterns": [
+      "ECMA-?\\s*(\\d+(?:\\.\\d+)*)",
+      "U3D\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "VDA-FS",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "VDA-?FS\\s*(\\d+(?:\\.\\d+)*)",
+      "Version\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  },
+  {
+    "name": "VRML",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "VRML\\s*V?\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "Wavefront OBJ",
+    "url": "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html",
+    "patterns": [
+      "Wavefront\\s*OBJ\\s*(\\d+(?:\\.\\d+)*)",
+      "OBJ\\s*(\\d+(?:\\.\\d+)*)"
     ]
   }
 ]

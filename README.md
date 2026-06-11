@@ -78,6 +78,11 @@ python -m cad_release_monitor --format PDFL --output-json out/pdfl_report.json
 
 Both the release monitor and format analyzer support `--format` parameter to focus on a single format:
 
+`--format` matching is intelligent (case-insensitive and fuzzy). Examples:
+- `navisworks` resolves to `Autodesk Navisworks`
+- `solidworks` resolves to `Solidworks`
+- `acis` resolves to `ACIS SAT` (in format gap analyzer)
+
 ### Release Monitor
 ```bash
 # Monitor a specific software/file format

@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
 import logging
+import re
 from pathlib import Path
 
 from cad_release_monitor.monitor import load_json, run_monitor
@@ -27,6 +29,47 @@ def print_summary(results: list) -> None:
     print(f"Successful:        {success}")
     print(f"Errors:            {errors}")
     print(f"Updates available: {alerts}")
+
+
+def _normalize_name(value: str) -> str:
+    lowered = value.lower().strip()
+    cleaned = re.sub(r"[^a-z0-9]+", " ", lowered)
+    return " ".join(cleaned.split())
+
+
+def _resolve_source_name(query: str, sources: list[dict]) -> tuple[str | None, list[str]]:
+    names = [s.get("name", "") for s in sources if s.get("name")]
+    if not names:
+        return None, []
+
+    q = query.strip()
+    q_norm = _normalize_name(q)
+
+    for name in names:
+        if name.lower() == q.lower():
+            return name, []
+
+    for name in names:
+        if _normalize_name(name) == q_norm:
+            return name, []
+
+    contains_matches = [
+        name
+        for name in names
+        if q_norm and (q_norm in _normalize_name(name) or _normalize_name(name) in q_norm)
+    ]
+    if len(contains_matches) == 1:
+        return contains_matches[0], []
+    if len(contains_matches) > 1:
+        return None, sorted(contains_matches)
+
+    normalized_to_name = {_normalize_name(name): name for name in names}
+    close = difflib.get_close_matches(q_norm, list(normalized_to_name.keys()), n=5, cutoff=0.55)
+    if close:
+        best = normalized_to_name[close[0]]
+        return best, [normalized_to_name[c] for c in close[1:]]
+
+    return None, []
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -76,13 +119,20 @@ def main() -> None:
     # Filter sources by format if specified
     if args.format:
         format_name = args.format.strip()
-        filtered = [s for s in sources if s.get("name", "").lower() == format_name.lower()]
-        if not filtered:
+        resolved_name, related = _resolve_source_name(format_name, sources)
+        if not resolved_name:
             logger.error(f"Format '{format_name}' not found in sources. Available formats: {', '.join(s.get('name', 'Unknown') for s in sources)}")
             print(f"ERROR: Format '{format_name}' not found in sources.")
-            print(f"Available formats: {', '.join(s.get('name', 'Unknown') for s in sources)}")
+            if related:
+                print(f"Did you mean one of: {', '.join(related)}")
+            else:
+                print(f"Available formats: {', '.join(s.get('name', 'Unknown') for s in sources)}")
             return
+        filtered = [s for s in sources if s.get("name", "") == resolved_name]
         sources = filtered
+        if format_name.lower() != resolved_name.lower():
+            logger.info(f"Resolved format '{format_name}' to '{resolved_name}'")
+            print(f"Resolved format: {resolved_name}")
 
     logger.info(f"Starting monitoring of {len(sources)} source(s)...")
     print("\nCAD Release Monitor - Report")
