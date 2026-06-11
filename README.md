@@ -1,0 +1,84 @@
+# CAD Release Monitoring Service (PoC)
+
+This is a small proof of concept that scrapes official product/standard pages, extracts version candidates using regex rules, and compares them with your currently used versions.
+
+## What It Does
+
+- Loads monitored sources from `config/sources.json`.
+- Loads your currently used versions from `data/current_versions.json`.
+- Fetches each page and extracts version strings using source-specific patterns.
+- Alerts when a detected version is newer than your current version.
+- Optionally saves results as JSON for downstream automation.
+
+## Project Structure
+
+- `src/cad_release_monitor/monitor.py`: scraping and version-comparison logic.
+- `src/cad_release_monitor/cli.py`: command-line interface.
+- `config/sources.json`: monitored software/file-format sources and regex patterns.
+- `data/current_versions.json`: your baseline versions.
+
+## Quick Start
+
+1. Create and activate a virtual environment (recommended).
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+3. Run the monitor:
+
+```bash
+python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json
+```
+
+4. Save JSON output (optional):
+
+```bash
+python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json --output-json out/report.json
+```
+
+## How To Customize
+
+- Add/remove monitored items in `config/sources.json`.
+- Tune each source's `patterns` to reduce false positives.
+- `data/current_versions.json` supports two formats:
+	- Simple (backward compatible):
+
+```json
+{
+	"Creo": "12.4.0.0"
+}
+```
+
+	- Extended (optional per-format source URLs):
+
+```json
+{
+	"Creo": {
+		"current_version": "12.4.0.0",
+		"source_urls": [
+			"https://example.com/creo-release-notes",
+			"https://example.com/creo-whats-new"
+		]
+	}
+}
+```
+
+	When `source_urls` are provided, the monitor tries those URLs first, then the URLs from `config/sources.json`. If source-specific regex patterns do not find a version, it falls back to a generic version extraction near the source name.
+- Add optional reliability keys per source in `config/sources.json`:
+	- `fallback_urls`: alternate pages to try when primary URL fails.
+	- `retries`: number of HTTP retries for transient failures (default: 2).
+	- `backoff_factor`: retry wait multiplier (default: 0.8).
+	- `timeout`: HTTP timeout in seconds for this source (default: from `--timeout` flag).
+	- `verify_ssl`: set to `false` only when a source has certificate issues.
+- Update `data/current_versions.json` with your current in-use versions.
+
+## Notes and Limitations
+
+- Some official sites are highly dynamic or protected by anti-bot measures.
+- Regex-based extraction is intentionally lightweight for PoC speed.
+- Per-source configuration keys (`timeout`, `retries`, `backoff_factor`, etc.) allow fine-tuning for slow or unstable endpoints.
+- This PoC now includes retry, fallback URL, per-source timeout, and summary reporting support.
+- For production reliability, consider source-specific parsers, retry/backoff, and scheduling/notification integrations (email, Teams, Slack).

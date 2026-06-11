@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Creo",
+    "url": "https://www.ptc.com/en/products/creo/whats-new",
+    "fallback_urls": [
+      "https://www.ptc.com/en/products/creo"
+    ],
+    "patterns": [
+      "Creo\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "NX",
+    "url": "https://plm.sw.siemens.com/en-US/nx/",
+    "patterns": [
+      "NX\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "CATIA",
+    "url": "https://www.3ds.com/products/catia",
+    "patterns": [
+      "CATIA\\s*(?:V|R)?(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "JT",
+    "url": "https://www.plm.automation.siemens.com/global/en/products/open/jt-open/",
+    "fallback_urls": [
+      "https://plm.sw.siemens.com/en-US/jt-open/",
+      "https://plm.sw.siemens.com/en-US/"
+    ],
+    "patterns": [
+      "JT\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "Solidworks",
+    "url": "https://www.solidworks.com/product/solidworks-3d-cad",
+    "fallback_urls": [
+      "https://www.solidworks.com/"
+    ],
+    "retries": 3,
+    "backoff_factor": 1.0,
+    "patterns": [
+      "Solidworks\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "STEP AP 242",
+    "url": "https://www.ap242.org/",
+    "verify_ssl": false,
+    "fallback_urls": [
+      "https://www.prostep.org/en/medialibrary/downloads/step-ap242"
+    ],
+    "patterns": [
+      "AP\\s*242(?:\\s*Edition\\s*)?(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "IFC",
+    "url": "https://technical.buildingsmart.org/standards/ifc/",
+    "patterns": [
+      "IFC\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "Inventor",
+    "url": "https://www.autodesk.com/products/inventor/overview",
+    "fallback_urls": [
+      "https://www.autodesk.com/products/inventor"
+    ],
+    "retries": 3,
+    "backoff_factor": 1.0,
+    "timeout": 40.0,
+    "patterns": [
+      "Inventor\\s*(\\d+(?:\\.\\d+)*)",
+      "(20\\d{2})"
+    ]
+  },
+  {
+    "name": "ODA",
+    "url": "https://www.opendesign.com/",
+    "patterns": [
+      "version\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "PDFL",
+    "url": "https://www.datalogics.com/products/pdf-tools/pdf-library/",
+    "patterns": [
+      "PDFL\\s*(\\d+(?:\\.\\d+)*)",
+      "version\\s*(\\d+(?:\\.\\d+)*)"
+    ]
+  }
+]

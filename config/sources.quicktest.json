@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Creo",
+    "url": "https://www.ptc.com/en/products/creo/whats-new",
+    "fallback_urls": [
+      "https://www.ptc.com/en/products/creo"
+    ],
+    "retries": 1,
+    "backoff_factor": 0.5,
+    "patterns": [
+      "Creo\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  },
+  {
+    "name": "CATIA",
+    "url": "https://www.3ds.com/products/catia",
+    "retries": 1,
+    "backoff_factor": 0.5,
+    "patterns": [
+      "CATIA\\s*(?:V|R)?(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  }
+]

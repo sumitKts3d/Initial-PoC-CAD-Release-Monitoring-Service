@@ -1,0 +1,218 @@
+{
+  "Creo": {
+    "current_version": "12.4.0.0",
+    "source_urls": [
+      "https://www.ptc.com/en/products/creo/whats-new"
+    ]
+  },
+  "NX": {
+    "current_version": "2512",
+    "source_urls": [
+      "https://plm.sw.siemens.com/en-US/nx/"
+    ]
+  },
+  "CATIA": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.3ds.com/products/catia"
+    ]
+  },
+  "JT": {
+    "current_version": "10.10",
+    "source_urls": [
+      "https://www.plm.automation.siemens.com/global/en/products/open/jt-open/"
+    ]
+  },
+  "Solidworks": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.solidworks.com/product/solidworks-3d-cad"
+    ]
+  },
+  "STEP AP 242": {
+    "current_version": "3.0",
+    "source_urls": [
+      "https://www.ap242.org/"
+    ]
+  },
+  "IFC": {
+    "current_version": "4.3",
+    "source_urls": [
+      "https://technical.buildingsmart.org/standards/ifc/"
+    ]
+  },
+  "Inventor": {
+    "current_version": "2027",
+    "source_urls": [
+      "https://www.autodesk.com/products/inventor/overview"
+    ]
+  },
+  "ODA": {
+    "current_version": "2024.12",
+    "source_urls": [
+      "https://www.opendesign.com/"
+    ]
+  },
+  "PDFL": {
+    "current_version": "18.0",
+    "source_urls": [
+      "https://www.datalogics.com/products/pdf-tools/pdf-library/"
+    ]
+  },
+  "3MF": {
+    "current_version": "1.2.3",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "ACIS": {
+    "current_version": "35.0 (3500)",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "AutoCAD - 2D": {
+    "current_version": "AutoCAD 2026",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "AutoCAD - 3D": {
+    "current_version": "AutoCAD 2026",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "Autodesk Inventor": {
+    "current_version": "2027",
+    "source_urls": [
+      "https://www.autodesk.com/products/inventor/overview"
+    ]
+  },
+  "Autodesk Navisworks": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.autodesk.com/products/navisworks/overview"
+    ]
+  },
+  "CATIA V4": {
+    "current_version": "4.2.5",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "CATIA V5": {
+    "current_version": "V5-6R2026",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "CATIA V6 / 3DExperience": {
+    "current_version": "3DXML 4.3",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "DGN": {
+    "current_version": "8",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "GL Transmission Format": {
+    "current_version": "Version 2.0",
+    "source_urls": [
+      "https://www.khronos.org/gltf/"
+    ]
+  },
+  "I-deas": {
+    "current_version": "NX I-deas 6",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "IGES": {
+    "current_version": "5.3",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "NX - Unigraphics": {
+    "current_version": "NX2512",
+    "source_urls": [
+      "https://plm.sw.siemens.com/en-US/nx/"
+    ]
+  },
+  "Parasolid": {
+    "current_version": "38.1",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "PDF": {
+    "current_version": "All Versions",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "PRC": {
+    "current_version": "All Versions",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "Revit": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://www.autodesk.com/products/revit/overview"
+    ]
+  },
+  "Rhino3D": {
+    "current_version": "8",
+    "source_urls": [
+      "https://www.rhino3d.com/"
+    ]
+  },
+  "Solid Edge": {
+    "current_version": "2026",
+    "source_urls": [
+      "https://solidedge.siemens.com/"
+    ]
+  },
+  "SolidWorks": {
+    "current_version": "From 97 up to 2026",
+    "source_urls": [
+      "https://www.solidworks.com/product/solidworks-3d-cad"
+    ]
+  },
+  "STEP": {
+    "current_version": "AP 242 Edition 3",
+    "source_urls": [
+      "https://www.ap242.org/"
+    ]
+  },
+  "U3D": {
+    "current_version": "ECMA-363",
+    "source_urls": [
+      "https://ecma-international.org/publications-and-standards/standards/ecma-363/"
+    ]
+  },
+  "VDA-FS": {
+    "current_version": "Version 2.0",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "VRML": {
+    "current_version": "V2.0",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  },
+  "Wavefront OBJ": {
+    "current_version": "Any",
+    "source_urls": [
+      "https://docs.techsoft3d.com/hoops/exchange/start/supported-formats.html"
+    ]
+  }
+}

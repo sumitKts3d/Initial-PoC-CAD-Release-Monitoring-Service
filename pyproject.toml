@@ -1,0 +1,23 @@
+[project]
+name = "cad-release-monitoring-service"
+version = "0.1.0"
+description = "PoC scraper to monitor CAD release versions and alert on updates"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "requests>=2.32.0",
+  "beautifulsoup4>=4.12.0"
+]
+
+[project.scripts]
+cad-monitor = "cad_release_monitor.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

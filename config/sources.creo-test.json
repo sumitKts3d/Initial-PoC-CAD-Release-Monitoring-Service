@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Creo",
+    "url": "https://www.ptc.com/en/products/creo/whats-new",
+    "fallback_urls": [
+      "https://www.ptc.com/en/products/creo"
+    ],
+    "patterns": [
+      "Creo\\s+(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
+    ]
+  }
+]

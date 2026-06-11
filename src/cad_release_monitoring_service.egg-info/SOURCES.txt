@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/cad_release_monitor/__init__.py
+src/cad_release_monitor/__main__.py
+src/cad_release_monitor/cli.py
+src/cad_release_monitor/monitor.py
+src/cad_release_monitoring_service.egg-info/PKG-INFO
+src/cad_release_monitoring_service.egg-info/SOURCES.txt
+src/cad_release_monitoring_service.egg-info/dependency_links.txt
+src/cad_release_monitoring_service.egg-info/entry_points.txt
+src/cad_release_monitoring_service.egg-info/requires.txt
+src/cad_release_monitoring_service.egg-info/top_level.txt

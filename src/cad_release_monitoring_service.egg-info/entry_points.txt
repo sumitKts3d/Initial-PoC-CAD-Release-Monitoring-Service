@@ -1,0 +1,2 @@
+[console_scripts]
+cad-monitor = cad_release_monitor.cli:main

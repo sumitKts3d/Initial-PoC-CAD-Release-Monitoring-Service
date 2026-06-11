@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: cad-release-monitoring-service
+Version: 0.1.0
+Summary: PoC scraper to monitor CAD release versions and alert on updates
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.32.0
+Requires-Dist: beautifulsoup4>=4.12.0
+
+# CAD Release Monitoring Service (PoC)
+
+This is a small proof of concept that scrapes official product/standard pages, extracts version candidates using regex rules, and compares them with your currently used versions.
+
+## What It Does
+
+- Loads monitored sources from `config/sources.json`.
+- Loads your currently used versions from `data/current_versions.json`.
+- Fetches each page and extracts version strings using source-specific patterns.
+- Alerts when a detected version is newer than your current version.
+- Optionally saves results as JSON for downstream automation.
+
+## Project Structure
+
+- `src/cad_release_monitor/monitor.py`: scraping and version-comparison logic.
+- `src/cad_release_monitor/cli.py`: command-line interface.
+- `config/sources.json`: monitored software/file-format sources and regex patterns.
+- `data/current_versions.json`: your baseline versions.
+
+## Quick Start
+
+1. Create and activate a virtual environment (recommended).
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the monitor:
+
+```bash
+python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json
+```
+
+4. Save JSON output (optional):
+
+```bash
+python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json --output-json out/report.json
+```
+
+## How To Customize
+
+- Add/remove monitored items in `config/sources.json`.
+- Tune each source's `patterns` to reduce false positives.
+- Update `data/current_versions.json` with your current in-use versions.
+
+## Notes and Limitations
+
+- Some official sites are highly dynamic or protected by anti-bot measures.
+- Regex-based extraction is intentionally lightweight for PoC speed.
+- For production reliability, consider source-specific parsers, retry/backoff, and scheduling/notification integrations (email, Teams, Slack).
