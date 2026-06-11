@@ -95,10 +95,13 @@
   },
   {
     "name": "PDFL",
-    "url": "https://www.datalogics.com/products/pdf-tools/pdf-library/",
+    "url": "https://dev.datalogics.com/adobe-pdf-library/release-notes",
+    "fallback_urls": [
+      "https://www.datalogics.com/products/pdf-tools/pdf-library/"
+    ],
     "patterns": [
-      "PDFL\\s*(\\d+(?:\\.\\d+)*)",
-      "version\\s*(\\d+(?:\\.\\d+)*)"
+      "(?:version|release)\\s*(\\d+(?:\\.\\d+)*)",
+      "(\\d+(?:\\.\\d+){1,3})"
     ]
   },
   {
