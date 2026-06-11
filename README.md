@@ -40,23 +40,73 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-3. Run release monitoring:
+3. Run release monitoring (all sources):
 
 ```bash
 python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json
 ```
 
-4. Run format support gap analysis:
+Or monitor a single format:
+
+```bash
+python -m cad_release_monitor --format JT --current data/current_versions.json
+python -m cad_release_monitor --format PDFL
+python -m cad_release_monitor --format "HOOPS Exchange"
+```
+
+4. Run format support gap analysis (all formats):
 
 ```bash
 python -m cad_release_monitor.format_cli --matrix data/format_support_matrix.json
+```
+
+Or analyze a single format:
+
+```bash
+python -m cad_release_monitor.format_cli --format JT
+python -m cad_release_monitor.format_cli --format "STEP AP 242"
 ```
 
 5. Save monitoring results as JSON (optional):
 
 ```bash
 python -m cad_release_monitor --sources config/sources.json --current data/current_versions.json --output-json out/report.json
+python -m cad_release_monitor --format PDFL --output-json out/pdfl_report.json
 ```
+
+## Using --format for Single Format Monitoring
+
+Both the release monitor and format analyzer support `--format` parameter to focus on a single format:
+
+### Release Monitor
+```bash
+# Monitor a specific software/file format
+python -m cad_release_monitor --format Creo
+python -m cad_release_monitor --format "STEP AP 242"
+python -m cad_release_monitor --format PDFL --timeout 30
+
+# Available formats can be found in config/sources.json
+# Formats include: Creo, NX, CATIA, JT, Solidworks, STEP AP 242, IFC, Inventor, ODA, PDFL, 
+# HOOPS Exchange, Spatial, Datakit, CAdExchanger, 3D InterOp, LibreCAD
+```
+
+### Format Gap Analyzer
+```bash
+# Analyze format support gaps for a single format
+python -m cad_release_monitor.format_cli --format JT
+python -m cad_release_monitor.format_cli --format "ACIS SAT"
+
+# Available formats in matrix can be found in data/format_support_matrix.json
+# Formats include: JT, STEP AP 242, IGES, ACIS SAT, Parasolid, DWG/DXF, IFC
+```
+
+**Benefits:**
+- Faster execution when monitoring a single format
+- Focused output for specific needs
+- Useful for CI/CD pipelines or scheduled tasks targeting specific formats
+- Easier to integrate into notification workflows
+
+## How To Customize
 
 ### Release Monitoring
 
