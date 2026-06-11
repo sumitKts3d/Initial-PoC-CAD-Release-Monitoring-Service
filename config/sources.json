@@ -87,8 +87,12 @@
   },
   {
     "name": "ODA",
-    "url": "https://www.opendesign.com/",
+    "url": "https://www.opendesign.com/Releases",
+    "fallback_urls": [
+      "https://www.opendesign.com/"
+    ],
     "patterns": [
+      "ODA\\s*(\\d+(?:\\.\\d+)*)",
       "version\\s*(\\d+(?:\\.\\d+)*)",
       "(\\d+(?:\\.\\d+){1,3})"
     ]
