@@ -2,9 +2,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 from pathlib import Path
 
 from cad_release_monitor.monitor import load_json, run_monitor
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 
 def print_summary(results: list) -> None:
@@ -59,31 +66,45 @@ def main() -> None:
 
     sources = load_json(args.sources)
     current_versions = load_json(args.current)
+    logger = logging.getLogger(__name__)
 
-    results = run_monitor(sources=sources, current_versions=current_versions, timeout=args.timeout)
-
-    print("CAD Release Monitor - Report")
+    logger.info(f"Starting monitoring of {len(sources)} source(s)...")
+    print("\nCAD Release Monitor - Report")
     print("=" * 60)
 
-    for result in results:
-        print(f"\n[{result.name}]")
+    results = []
+    for idx, source in enumerate(sources, start=1):
+        source_name = source.get("name", "Unknown")
+        logger.info(f"[{idx}/{len(sources)}] Looking for format - {source_name}...")
+
+        from cad_release_monitor.monitor import check_source
+        result = check_source(source=source, current_versions=current_versions, timeout=args.timeout)
+        results.append(result)
+
+        # Print result immediately after checking
+        print(f"\n[{source_name}]")
         print(f"Source: {result.url}")
 
         if result.error:
             print(f"Status: ERROR - {result.error}")
-            continue
-
-        print(f"Current version: {result.current_version or 'Not provided'}")
-        print(f"Latest detected: {result.latest_detected or 'Not found'}")
-
-        if result.current_version and result.newer_versions:
-            print("ALERT: New version(s) available -> " + ", ".join(result.newer_versions))
-        elif result.current_version:
-            print("Status: No newer version found")
+            logger.warning(f"  {source_name}: ERROR - {result.error}")
         else:
-            print("Status: Current version not provided, comparison skipped")
+            print(f"Current version: {result.current_version or 'Not provided'}")
+            print(f"Latest detected: {result.latest_detected or 'Not found'}")
+
+            if result.current_version and result.newer_versions:
+                alert_msg = f"New version(s) available -> {', '.join(result.newer_versions)}"
+                print(f"ALERT: {alert_msg}")
+                logger.info(f"  {source_name}: ALERT - {alert_msg}")
+            elif result.current_version:
+                print("Status: No newer version found")
+                logger.info(f"  {source_name}: No newer version found")
+            else:
+                print("Status: Current version not provided, comparison skipped")
+                logger.info(f"  {source_name}: Comparison skipped (no current version)")
 
     print_summary(results)
+    logger.info("Monitoring complete.")
 
     if args.output_json:
         payload = [
